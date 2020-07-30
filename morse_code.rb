@@ -1,30 +1,34 @@
-HASH_MORSE = {
-  '.-' => 'a',
-  '-...' => 'b',
-  '-.-.' => 'c',
-  '-..' => 'd',
-  '.' => 'e',
-  '..-.' => 'f',
-  '--.' => 'g',
-  '....' => 'h',
-  '..' => 'i',
-  '.---' => 'j',
-  '-.-' => 'k',
-  '.-..' => 'l',
-  '--' => 'm',
-  '-.' => 'n',
-  '---' => 'o',
-  '.--.' => 'p',
-  '--.-' => 'q',
-  '.-.' => 'r',
-  '...' => 's',
-  '-' => 't',
-  '..-' => 'u',
-  '...-' => 'v',
-  '.--' => 'w',
-  '-..-' => 'x',
-  '-.--' => 'y',
-  '--..' => 'z',
+# morse codes constant
+MORSE_CODES = {
+  # alpha chars
+  '.-'    => 'a',
+  '-...'  => 'b',
+  '-.-.'  => 'c',
+  '-..'   => 'd',
+  '.'     => 'e',
+  '..-.'  => 'f',
+  '--.'   => 'g',
+  '....'  => 'h',
+  '..'    => 'i',
+  '.---'  => 'j',
+  '-.-'   => 'k',
+  '.-..'  => 'l',
+  '--'    => 'm',
+  '-.'    => 'n',
+  '---'   => 'o',
+  '.--.'  => 'p',
+  '--.-'  => 'q',
+  '.-.'   => 'r',
+  '...'   => 's',
+  '-'     => 't',
+  '..-'   => 'u',
+  '...-'  => 'v',
+  '.--'   => 'w',
+  '-..-'  => 'x',
+  '-.--'  => 'y',
+  '--..'  => 'z',
+
+  # now numbers
   '.----' => '1',
   '..---' => '2',
   '...--' => '3',
@@ -35,35 +39,37 @@ HASH_MORSE = {
   '---..' => '8',
   '----.' => '9',
   '-----' => '0',
-  '/' => ' ' # Mapping foward bar to be a space
+  
+  # Mapping foward bar to be a space
+  '/' => ' '
 }
 
-class ConvertFromMorse
-  def get_translated(string_morse)
+class MorseCode
+  def morse_to_text(string_morse)
     @translated_string = ""
     puts translate(string_morse)
   end
 
-  def mk_morse_code line
-    line.split('').map{|c| HASH_MORSE.key c.downcase}.join(' ')
+  def text_to_morse line
+    line.split('').map{|c| MORSE_CODES.key c.downcase}.join(' ')
   end
 
   private
   def translate(string_morse)
     array_morse = string_morse.split()
-    array_morse.each{|morse| @translated_string += HASH_MORSE[morse] unless HASH_MORSE[morse].nil? }
+    array_morse.each{|morse| @translated_string += MORSE_CODES[morse] unless MORSE_CODES[morse].nil? }
     @translated_string
   end
 end
 
-morse = ConvertFromMorse.new
+morse = MorseCode.new
 
-morse.get_translated("-- --- .-. ... . / -.-. --- -.. . / - .... . / -. . .-- / -.. . .- -.. / .-.. .- -. --. ..- .- --. . .-.-.-")
-morse.get_translated("--- -- --.  .. ...  -- --- .-. ... .  -.-. --- -..")
-morse.get_translated("- .-- . . - ... / .- .-. . / . ...- . -. / ... .... --- .-. - . .-. / .-- .. - .... / -- --- .-. ... . / -.-. --- -..")
-morse.get_translated("-- --- .-. ... .   -.-. --- -.. .   .. ...   -... .- -..   ..-. --- .-.   - .-- . . - .. -. --")
-morse.get_translated(".. - /  .. ... /  .- /  .--. .-.. . .- ... ..- .-. . /  - --- /  -- . . - /  -.-- --- ..- /  .- ... /  .-- . .-.. .-.")
+morse.morse_to_text("-- --- .-. ... . / -.-. --- -.. . / - .... . / -. . .-- / -.. . .- -.. / .-.. .- -. --. ..- .- --. . .-.-.-")
+morse.morse_to_text("--- -- --.  .. ...  -- --- .-. ... .  -.-. --- -..")
+morse.morse_to_text("- .-- . . - ... / .- .-. . / . ...- . -. / ... .... --- .-. - . .-. / .-- .. - .... / -- --- .-. ... . / -.-. --- -..")
+morse.morse_to_text("-- --- .-. ... .   -.-. --- -.. .   .. ...   -... .- -..   ..-. --- .-.   - .-- . . - .. -. --")
+morse.morse_to_text(".. - /  .. ... /  .- /  .--. .-.. . .- ... ..- .-. . /  - --- /  -- . . - /  -.-- --- ..- /  .- ... /  .-- . .-.. .-.")
 
-mc = morse.mk_morse_code('HAHAHA Interesting! Thx PotHix.')
+mc = morse.text_to_morse('HAHAHA Interesting! Thx PotHix.')
 puts mc
-morse.get_translated mc
+morse.morse_to_text mc
