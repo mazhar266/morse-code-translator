@@ -41,7 +41,7 @@ MORSE_CODES = {
   '-----' => '0',
   
   # Mapping foward bar to be a space
-  '/' => ' '
+  '/'.    => ' '
 }
 
 class MorseCode
